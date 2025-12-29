@@ -11,7 +11,7 @@ namespace ExtState
         protected readonly List<IState> StatesList = new();
         private readonly Dictionary<Type, IState> _states = new();
 
-        protected abstract Enum LogTag { get; }
+        public abstract Enum LogTag { get; }
 
         #region Enter
 
