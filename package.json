@@ -1,7 +1,7 @@
 {
   "name": "com.firstsymbol.extstate",
   "displayName": "ExtState",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "documentationUrl": "https://github.com/FirstSymbol/ExtState.git",
   "description": "State machine for Unity.",
   "homepage": "https://github.com/FirstSymbol/ExtState#readme",
