@@ -15,7 +15,11 @@ namespace ExtState
 
         #region Enter
 
-        protected async UniTask Enter<TState>() where TState : class, IState, IEnterableState
+        /// <summary>
+        /// It enters the state through the generic type
+        /// </summary>
+        /// <typeparam name="TState">State type</typeparam>
+        public async UniTask Enter<TState>() where TState : class, IState, IEnterableState
         {
             var state = await ChangeState<TState>();
 
@@ -23,8 +27,12 @@ namespace ExtState
 
             await state.Enter();
         }
-        
-        protected async UniTask Enter(Type type)
+
+        /// <summary>
+        /// It entres the state through the System.Type
+        /// </summary>
+        /// <param name="type">Type of State</param>
+        public async UniTask Enter(Type type)
         {
             var state = await ChangeState(type);
 
@@ -33,7 +41,13 @@ namespace ExtState
             if (state is IEnterableState enterableState) await enterableState.Enter();
         }
 
-        protected async UniTask Enter<TState, TPayload>(TPayload payload) where TState : class, IState, IPayloadedState<TPayload>
+        /// <summary>
+        /// It enters the state through the generic type with enter data argument
+        /// </summary>
+        /// <param name="payload">State enter data instance</param>
+        /// <typeparam name="TState">State type</typeparam>
+        /// <typeparam name="TPayload">State enter data type</typeparam>
+        public async UniTask Enter<TState, TPayload>(TPayload payload) where TState : class, IState, IPayloadedState<TPayload>
         {
             var state = await ChangeState<TState>();
 
@@ -41,8 +55,12 @@ namespace ExtState
 
             await state.Enter(payload);
         }
-        
-        protected async UniTask Enter(int index)
+
+        /// <summary>
+        /// It enters the state through the index
+        /// </summary>
+        /// <param name="index">Index of state in states list</param>
+        public async UniTask Enter(int index)
         {
             var state = await ChangeState(index);
 
