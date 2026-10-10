@@ -1,0 +1,18 @@
+{
+    "name": "FirstSymbol.ExtState.Editor",
+    "rootNamespace": "ExtState.Editor",
+    "references": [
+        "FirstSymbol.ExtState"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
