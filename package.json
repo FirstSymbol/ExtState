@@ -1,10 +1,18 @@
 {
   "name": "com.firstsymbol.extstate",
   "displayName": "ExtState",
-  "version": "0.0.4",
-  "documentationUrl": "https://github.com/FirstSymbol/ExtState.git",
-  "description": "State machine for Unity.",
-  "homepage": "https://github.com/FirstSymbol/ExtState#readme",
+  "version": "1.0.0",
+  "unity": "6000.0",
+  "description": "Asynchronous state machine for Unity on UniTask: serialized transitions (safe to request from inside states), payload states, DI-agnostic factories, sequential machines and a live debugger window. Requires UniTask.",
+  "documentationUrl": "https://github.com/FirstSymbol/ExtState#readme",
+  "changelogUrl": "https://github.com/FirstSymbol/ExtState/blob/main/CHANGELOG.md",
+  "keywords": [
+    "state machine",
+    "fsm",
+    "unitask",
+    "async"
+  ],
+  "dependencies": {},
   "author": {
     "name": "FirstSymbol",
     "url": "https://linkedin.com/in/firstsymbol"
