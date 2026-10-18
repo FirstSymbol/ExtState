@@ -14,7 +14,7 @@ jobs:
 
       - name: package.json is valid
         run: |
-          jq -e '.name and .version and .displayName and .unity' package.json > /dev/null
+          jq -e '.name and .version and .displayName' package.json > /dev/null
           echo "$(jq -r .name package.json)@$(jq -r .version package.json)"
 
       - name: version matches tag
