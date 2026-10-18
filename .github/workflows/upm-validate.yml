@@ -1,0 +1,46 @@
+name: upm-validate
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: package.json is valid
+        run: |
+          jq -e '.name and .version and .displayName and .unity' package.json > /dev/null
+          echo "$(jq -r .name package.json)@$(jq -r .version package.json)"
+
+      - name: version matches tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(jq -r .version package.json)"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+
+      - name: no Unity build folders
+        run: |
+          for d in Library Temp Obj Logs UserSettings; do
+            if [ -e "$d" ]; then echo "::error::$d/ must not be committed"; exit 1; fi
+          done
+
+      - name: every asset has a .meta and every .meta has an asset
+        run: |
+          status=0
+          # Unity ignores hidden entries and folders ending with '~'
+          while IFS= read -r -d '' p; do
+            [ -e "$p.meta" ] || { echo "::error file=$p::missing $p.meta"; status=1; }
+          done < <(find . -mindepth 1 \( -name '.*' -o -name '*~' \) -prune -o ! -name '*.meta' -print0)
+          while IFS= read -r -d '' m; do
+            [ -e "${m%.meta}" ] || { echo "::error file=$m::orphan meta"; status=1; }
+          done < <(find . -mindepth 1 \( -name '.*' -o -name '*~' \) -prune -o -name '*.meta' -print0)
+          exit $status
